@@ -17,7 +17,7 @@ import java.util.List;
  *                                 이러면 테스트에도 용이하며 실무에서 작성할때 해당 클래스는 MemberRepository를 의존하고 있다라는 것을 놓치지 않게 해준다.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class MemberService {
 
