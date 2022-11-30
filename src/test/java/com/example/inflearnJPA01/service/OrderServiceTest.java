@@ -4,7 +4,6 @@ import com.example.inflearnJPA01.domain.Address;
 import com.example.inflearnJPA01.domain.Member;
 import com.example.inflearnJPA01.domain.Order;
 import com.example.inflearnJPA01.domain.OrderStatus;
-import com.example.inflearnJPA01.domain.exception.NotEnoughStockException;
 import com.example.inflearnJPA01.domain.item.Book;
 import com.example.inflearnJPA01.domain.item.Item;
 import com.example.inflearnJPA01.repository.OrderRepository;
@@ -87,11 +86,12 @@ class OrderServiceTest {
     }
 
     private Item createItem(){
-        Item book = new Book();
-        book.setNama("책");
+       /* Item book = new Book();
+        book.setName("책");
         book.setPrice(10000);
         book.setStockQuantity(10);
-        entityManager.persist(book);
+        entityManager.persist(book);*/
+        Item book = Book.createBook("책", 10000, 10, "작가11", "ISBN11");
         return book;
     }
 }

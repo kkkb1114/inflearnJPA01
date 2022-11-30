@@ -21,7 +21,7 @@ public abstract class Item {
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
-    private String nama; // 상품 이름
+    private String name; // 상품 이름
     private int price; // 상품 가격
     private int stockQuantity; // 상품 재고 수량
     @ManyToMany(mappedBy = "itemList")

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--헤어 include-->
+<head th:replace="fragments/header :: header" />
+<style>
+ .fieldError {
+ border-color: #bd2130;
+ }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <!--데이터 전송 전용 form 태그 구간-->
+    <!--th:???는 thymeleaf 문법으로 thymeleaf를 이용하여 객체 또는 데이터를 붙일 수가 있다.-->
+    <form role="form" action="/members/new" th:object="${memberForm}"
+          method="post">
+        <div class="form-group">
+            <label th:for="name">이름</label>
+            <!--th:field="*{name}"는 thymeleaf 문법으로 해당 태그의 id와 name 키값을 name으로 똑같이 맞추며
+                상위 태그인 form 태그의 th:object="${memberForm}"로 인하여 MemberController에 있는 createForm()의 addAttribute("memberForm")에 따라
+                memberForm 클래스 안에 있는 데이터들을 from태그 안의 태그들에 field로 활용할수 있다.-->
+            <input type="text" th:field="*{name}" class="form-control"
+                   placeholder="이름을 입력하세요"
+                   th:class="${#fields.hasErrors('name')}? 'form-control
+                   fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}">Incorrect date</p>
+        </div>
+        <div class="form-group">
+            <label th:for="city">도시</label>
+            <input type="text" th:field="*{city}" class="form-control"
+                   placeholder="도시를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="street">거리</label>
+            <input type="text" th:field="*{street}" class="form-control"
+                   placeholder="거리를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="zipcode">우편번호</label>
+            <input type="text" th:field="*{zipcode}" class="form-control"
+                   placeholder="우편번호를 입력하세요">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!--!데이터 전송 전용 form 태그 구간!-->
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
