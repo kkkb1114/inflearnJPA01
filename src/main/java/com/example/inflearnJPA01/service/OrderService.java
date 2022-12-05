@@ -5,9 +5,12 @@ import com.example.inflearnJPA01.domain.item.Item;
 import com.example.inflearnJPA01.repository.ItemRepository;
 import com.example.inflearnJPA01.repository.MemberRepository;
 import com.example.inflearnJPA01.repository.OrderRepository;
+import com.example.inflearnJPA01.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -52,8 +55,9 @@ public class OrderService {
     /**
      * 주문 검색
      */
-    /*@Transactional(readOnly = true)
-    public Order orderSearch(){
-
-    }*/
+    @Transactional(readOnly = true)
+    public List<Order> orderSearch(OrderSearch orderSearch){
+        List<Order> orderList = orderRepository.orderFindAll(orderSearch);
+        return orderList;
+    }
 }

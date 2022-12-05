@@ -1,9 +1,10 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test;
+    url: jdbc:h2:tcp://localhost/~/jpashop;
     username: sa
     password:
     driver-class-name: org.h2.Driver
+    #url: jdbc:h2:mem:test;
 
   # ddl-auto: create-drop: 이 옵션은 애플리케이션 실행 시점에 자동으로 테이블을 drop하고, 다시 생성해준다는 말이다.
   jpa:

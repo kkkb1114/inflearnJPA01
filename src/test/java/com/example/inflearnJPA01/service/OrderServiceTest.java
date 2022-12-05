@@ -91,7 +91,7 @@ class OrderServiceTest {
         book.setPrice(10000);
         book.setStockQuantity(10);
         entityManager.persist(book);*/
-        Item book = Book.createBook("책", 10000, 10, "작가11", "ISBN11");
+        Item book = Book.createBook(0L, "책", 10000, 10, "작가11", "ISBN11");
         return book;
     }
 }
