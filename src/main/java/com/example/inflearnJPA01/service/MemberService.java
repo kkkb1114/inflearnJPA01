@@ -49,7 +49,19 @@ public class MemberService {
 
     // 회원 조건 조회
     @Transactional(readOnly = true)
-    public List<Member> memberFindOne(String name){
+    public List<Member> memberFindOneName(String name){
         return memberRepository.findOne(name);
+    }
+
+    @Transactional(readOnly = true)
+    public Member memberFindOneId(Long id){
+        return memberRepository.findOne(id);
+    }
+
+    // 회원 수정
+    @Transactional
+    public void update(Long id, String name){
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
     }
 }

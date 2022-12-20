@@ -1,5 +1,6 @@
 package com.example.inflearnJPA01.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 지연로딩은 db에서 데이터를 끌어오는것이 아니라
     @JoinColumn(name = "member_id")
     private Member member; // 회원
 
@@ -42,6 +43,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; // enum 클래스: 주문 상태 (ORDER, CAN CEL)
+
 
     // 연관관계 메서드 //
     public void setMember(Member member){

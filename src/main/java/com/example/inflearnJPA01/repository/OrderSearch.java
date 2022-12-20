@@ -4,13 +4,19 @@ import com.example.inflearnJPA01.domain.OrderStatus;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 
 @Getter @Setter
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderSearch {
-    private final EntityManager entityManager;
+    @Autowired
+    private EntityManager entityManager;
     private String memberName;
     private OrderStatus orderStatus;
+
+    public OrderSearch(){
+
+    }
 }
