@@ -15,6 +15,7 @@ public class InflearnJpa01Application {
 
 	@Bean
 	Hibernate5Module hibernate5Module(){
+		Hibernate5Module hibernate5Module = new Hibernate5Module();
 		return new Hibernate5Module();
 	}
 

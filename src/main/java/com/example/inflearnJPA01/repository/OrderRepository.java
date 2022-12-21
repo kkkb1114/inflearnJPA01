@@ -2,11 +2,8 @@ package com.example.inflearnJPA01.repository;
 
 import com.example.inflearnJPA01.domain.Member;
 import com.example.inflearnJPA01.domain.Order;
-import com.example.inflearnJPA01.domain.OrderStatus;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -25,14 +22,14 @@ public class OrderRepository {
     /**
      * 주문
      */
-    public void save(Order order){
+    public void save(Order order) {
         entityManager.persist(order);
     }
 
     /**
      * 주문 취소
      */
-    public void orderCancel(Order order){
+    public void orderCancel(Order order) {
         entityManager.remove(order);
     }
 
@@ -41,7 +38,7 @@ public class OrderRepository {
      */
     // 해당 기능처럼 복잡한 기능은 순수 JPA 기능으로는 유지보수 측면에서 무리가 있다고 한다.
     // 때문에 Querydsl을 사용하는데 해당 강의는 따로 결제해야할듯 하다.
-    public List<Order> orderFindAll(OrderSearch orderSearch){
+    public List<Order> orderFindAll(OrderSearch orderSearch) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> cq = cb.createQuery(Order.class);
         Root<Order> o = cq.from(Order.class);
@@ -65,7 +62,24 @@ public class OrderRepository {
         return query.getResultList();
     }
 
-    public Order orderFindOne(Long id){
+    public Order orderFindOne(Long id) {
         return entityManager.find(Order.class, id);
+    }
+
+    //todo join fetch에 대해 100% 무조건 이해해야한다고 한다. (by김영한)
+    public List<Order> findAllWithMemberDelivery() {
+        return entityManager.createQuery("select o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithOrderItem() {
+        return entityManager.createQuery("select distinct o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d" +
+                " join fetch o.orderItemList oi" +
+                " join fetch oi.item i", Order.class)
+                .getResultList();
     }
 }

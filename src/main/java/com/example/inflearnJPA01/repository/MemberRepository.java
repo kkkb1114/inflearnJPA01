@@ -36,8 +36,6 @@ public class MemberRepository {
 
     // JPQL 사용
     public List<Member> findOne(String name){
-        //지울것!
-        System.out.println("asdasdasd:"+name);
         return entityManager.createQuery("select m from Member m where m.name = :name", Member.class)
                 .setParameter("name", name)
                 .getResultList();

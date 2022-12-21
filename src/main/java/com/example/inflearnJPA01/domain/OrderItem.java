@@ -1,6 +1,7 @@
 package com.example.inflearnJPA01.domain;
 
 import com.example.inflearnJPA01.domain.item.Item;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class OrderItem {
     @JoinColumn(name = "item_id")
     private Item item; // 상품
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order; // 주문
