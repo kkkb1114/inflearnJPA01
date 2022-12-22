@@ -1,4 +1,4 @@
-package com.example.inflearnJPA01.repository.order_repository;
+package com.example.inflearnJPA01.repository.order_repository.simplequery;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ public class OrderSimpleQueryRepository {
 
     public List<OrderSimpleQueryDto> findOrderDtos() {
         return entityManager.createQuery(
-                "select new com.example.inflearnJPA01.repository.order_repository.OrderSimpleQueryDto(" +
+                "select new com.example.inflearnJPA01.repository.order_repository.simplequery.OrderSimpleQueryDto(" +
                         "o.id, m.name, o.orderDate, o.orderStatus, d.address)" +
                         " from Order o" +
                         " join o.member m" +

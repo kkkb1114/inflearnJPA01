@@ -1,4 +1,4 @@
-package com.example.inflearnJPA01.repository.order_repository;
+package com.example.inflearnJPA01.repository.order_repository.simplequery;
 
 import com.example.inflearnJPA01.domain.Address;
 import com.example.inflearnJPA01.domain.OrderStatus;
