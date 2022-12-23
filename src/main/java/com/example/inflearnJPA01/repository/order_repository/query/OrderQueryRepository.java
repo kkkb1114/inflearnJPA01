@@ -78,6 +78,15 @@ public class OrderQueryRepository {
         return orderQueryDtoList;
     }
 
+    /**
+     * < 해당 방법은 좋지 않은 방식이다. >
+     *  장점:
+     * 1. 받을 데이터만 담은 Dto를 만들어서 한번의 쿼리로 데이터를 한번에 받았다.
+     *  단점:
+     * 2. 하지만 조인으로 인해 중복 데이터가 추가되므로 상화에따라 V5보다 느릴수 있다.
+     * 3. 애플리케이션에서 작업할게 더 많아진다.
+     * 4. 페이징 불가능 (데이터 중복이 생성되기 때문이다.)
+     * **/
     public List<OrderFlatDto> findAllByDto_flat() {
         return entityManager.createQuery(
                 "select new com.example.inflearnJPA01.repository.order_repository.query.OrderFlatDto(o.id, m.name, o.orderDate, o.orderStatus, d.address, i.name, oi.orderPrice, oi.count)" +

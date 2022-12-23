@@ -6,6 +6,8 @@ import com.example.inflearnJPA01.repository.OrderSearch;
 import com.example.inflearnJPA01.repository.order_repository.query.OrderFlatDto;
 import com.example.inflearnJPA01.repository.order_repository.query.OrderQueryDto;
 import com.example.inflearnJPA01.repository.order_repository.query.OrderQueryRepository;
+import com.example.inflearnJPA01.service.query.OrderDto;
+import com.example.inflearnJPA01.service.query.OrderQueryService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +48,7 @@ public class OrderApiController {
     /**
      * 아래 클래스의 생성자와 같이 무조건 Entity클래스는 절대 노출되서는 안되기 때문에 Dto로 바꾼다. (OrderDto, OrderItemDto)
      **/
-    @Getter
+    /*@Getter
     class OrderDto {
         private Long id;
         private String name; // 회원
@@ -66,9 +68,9 @@ public class OrderApiController {
                     .map(oi -> new OrderItemDto(oi))
                     .collect(Collectors.toList());
         }
-    }
+    } */
 
-    @Getter
+  /*  @Getter
     class OrderItemDto {
         private String ItemName;
         private int ItemPrice;
@@ -79,14 +81,13 @@ public class OrderApiController {
             this.ItemPrice = orderItem.getItem().getPrice();
             this.count = orderItem.getItem().getStockQuantity();
         }
-    }
+    } */
+
+    private final OrderQueryService orderQueryService;
 
     @GetMapping("/api/v3/orders")
     public List<OrderDto> orderListV3() {
-        List<Order> orderList = orderRepository.findAllWithOrderItem();
-        return orderList.stream()
-                .map(OrderDto::new)
-                .collect(Collectors.toList());
+        return orderQueryService.orderListV3();
     }
 
     @GetMapping("/api/v3-1/orders")
